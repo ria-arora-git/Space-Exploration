@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NASA APOD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body, html {
+      height: 100%;
+    }
+    #myVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body class="font-sans bg-gray-100 h-full w-full">
+  <video autoplay muted loop id="myVideo">
+    <source src="main-video.mp4" type="video/mp4">
+  </video>
+
+  <div class="flex h-full w-full">
+    <div class="h-auto w-1/3 pt-40 text-center justify-center align-center flex bg-black bg-opacity-30 border-black bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10">
+      <div class="content container mx-auto p-4">
+        <h1 class="text-6xl font-bold mb-6 text-center text-white">
+          <div>Astronomy Picture <br> of the  Day</div>
+        </h1>
+        <div class="mb-8 flex h-15 justify-center align-center mt-10">
+          <input type="date" id="date" class="border border-gray-400 p-2 rounded w-1/3 h-15 flex justify-center align-center mr-2" placeholder="Select a date">
+          <button onclick="fetchAPOD()" class="bg-blue-500 text-white p-2 rounded h-15 w-1/7 rounded-full"><img class="h-10 w-10" src="search.png"> </button>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="h-full w-2/3 mt-2 text-center justify-center align-center flex">
+      <div id="apod" class=" p-4 rounded shadow text-white text-center w-full mx-10">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchAPOD() {
+      const date = document.getElementById('date').value;
+      const apiKey = 'DEMO_KEY';
+      const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`);
+      const data = await response.json();
+      const apodDiv = document.getElementById('apod');
+      apodDiv.innerHTML = `
+        <h2 class="text-4xl font-bold mb-5">${data.title}</h2>
+        <img src="${data.url}" alt="${data.title}" class="w-50 h-50 mb-4 rounded shadow">
+        <p class="text-lg mb-4">${data.explanation}</p>
+        ${data.copyright ? `<p class="text-sm">© ${data.copyright}</p>` : ''}
+      `;
+    }
+  </script>
+</body>
+</html>

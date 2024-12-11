@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .form-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input::placeholder, textarea::placeholder {
+            color: #003f00 !important; 
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen w-full">
+
+    <video autoplay muted loop class="video-background">
+        <source src="try.mp4" type="video/mp4">
+    </video>
+
+    <div class="flex w-full max-w-5xl items-center justify-center align-center m-2">
+        <div class="form-container bg-black bg-opacity-75 p-6 rounded-lg shadow-lg w-2/5 mr-3">
+            <h1 class="text-center text-4xl font-semibold text-white mb-6">Rate Us</h1>
+            <form id="registrationForm" onsubmit="return validateForm()">
+                <label for="name" class="block text-white font-bold mb-2">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" class="w-full p-3 border border-white rounded-lg mb-4">
+                <span id="name-error" class="text-red-500 text-sm"></span>
+
+                <label for="mobile" class="block text-white font-bold mb-2">Mobile Number:</label>
+                <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" class="w-full p-3 border border-white rounded-lg mb-4">
+                <span id="mobile-error" class="text-red-500 text-sm"></span>
+
+                <label for="email" class="block text-white font-bold mb-2">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" class="w-full p-3 border border-white rounded-lg mb-4">
+                <span id="email-error" class="text-red-500 text-sm"></span>
+
+                <label class="block text-white font-bold mb-2">Rate Us:</label>
+                <div class="flex justify-between mb-4">
+                    <label for="1" class="flex items-center text-white">
+                        <input type="radio" id="1" name="rating" value="1" class="mr-2">1
+                    </label>
+                    <label for="2" class="flex items-center text-white">
+                        <input type="radio" id="2" name="rating" value="2" class="mr-2">2
+                    </label>
+                    <label for="3" class="flex items-center text-white">
+                        <input type="radio" id="3" name="rating" value="3" class="mr-2">3
+                    </label>
+                    <label for="4" class="flex items-center text-white">
+                        <input type="radio" id="4" name="rating" value="4" class="mr-2">4
+                    </label>
+                    <label for="5" class="flex items-center text-white">
+                        <input type="radio" id="5" name="rating" value="5" class="mr-2">5
+                    </label>
+                </div>
+                <span id="rate-error" class="text-red-500 text-sm"></span>
+
+                <label for="problem" class="block text-white font-bold mb-2">Any problem faced?</label>
+                <select id="problem" name="problem" class="w-full p-3 border border-white rounded-lg mb-4">
+                    <option value="">Select problem</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <span id="problem-error" class="text-red-500 text-sm"></span>
+
+                <label for="problem-description" class="block text-white font-bold mb-2">Describe the problem (optional):</label>
+                <textarea id="problem-description" name="problem-description" placeholder="Describe the problem here (if any)" class="w-full p-3 border border-white rounded-lg mb-4"></textarea>
+
+                <div class="flex justify-between">
+                    <button type="submit" class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600">Submit</button>
+                    <button type="reset" class="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600">Reset</button>
+                </div>
+            </form>
+        </div> 
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Clear previous errors
+            document.querySelectorAll('.text-red-500').forEach((el) => el.textContent = '');
+
+            // Name validation (only letters and spaces allowed)
+            const name = document.getElementById('name').value.trim();
+            if (!name || !/^[A-Za-z\s]+$/.test(name)) {
+                document.getElementById('name-error').textContent = "Name should only contain letters and spaces.";
+                isValid = false;
+            }
+
+            // Mobile validation (only digits, length 10)
+            const mobile = document.getElementById('mobile').value.trim();
+            if (!mobile || !/^\d{10}$/.test(mobile)) {
+                document.getElementById('mobile-error').textContent = "Please enter a valid 10-digit mobile number.";
+                isValid = false;
+            }
+
+            // Email validation (must be a valid email format)
+            const email = document.getElementById('email').value.trim();
+            if (!email || !/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById('email-error').textContent = "Please enter a valid email address.";
+                isValid = false;
+            }
+
+            // Rate validation (must be selected)
+            const rate = document.querySelector('input[name="rating"]:checked');
+            if (!rate) {
+                document.getElementById('rate-error').textContent = "Please select a rating";
+                isValid = false;
+            }
+
+            // Problem validation (must be selected)
+            const problem = document.getElementById('problem').value;
+            if (!problem) {
+                document.getElementById('problem-error').textContent = "Please select yes or no";
+                isValid = false;
+            }
+
+            // If the form is valid, show alert
+            if (isValid) {
+                alert("Form submitted successfully!");
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>

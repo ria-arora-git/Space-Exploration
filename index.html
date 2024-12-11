@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore the space</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    body, html {
+    height: 100%;
+    }
+
+    #myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    }
+
+    .content {
+    position: relative;
+    z-index: 1;
+    }
+</style>
+</head>
+<body class="h-screen w-full">
+<video autoplay muted loop id="myVideo">
+  <source src="astroid.mp4" type="video/mp4">
+</video>
+    <div class="h-screen w-full">
+        <div class="h-[25vh] w-full text-8xl text-center text-white bg-black bg-opacity-80 flex justify-center items-center border-4 border-black">
+        EXPLORE THE SPACE   
+        </div>
+        <div class="h-[75vh] w-full flex justify-center items-center text-center place-items-center ">
+            <div class="w-4/5 flex justify-center items-center text-center place-items-center h-2/5 w-full relative">
+                
+            
+                <div class="h-80 w-80 bg-black bg-opacity-95 border-black border-4 rounded-full flex justify-center items-center text-center place-items-center text-4xl text-white">
+                    <a href="apod.html">Astronomy <br> Picture <br> of the  Day</a>
+                </div>
+                <div class="h-80 w-80 bg-black bg-opacity-90 border-black border-4 rounded-full ml-24 mr-24 flex justify-center items-center text-center place-items-center text-4xl text-white">
+                    <a href="gallery.html">NASA <br> Gallery</a>
+                </div>
+                <div class="h-80 w-80 bg-black bg-opacity-90 border-black border-4 rounded-full flex justify-center items-center text-center place-items-center text-4xl text-white">
+                    <a href="contact.html">Rate Us</a>
+                </div>
+            
+            </div>
+            
+        </div>
+        
+    </div>
+</body>
+</html>
